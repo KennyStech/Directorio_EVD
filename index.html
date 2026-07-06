@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Directorio de Evaluaciones · 4G Architecture</title>
+  <!-- Century Gothic se carga desde el sistema operativo del usuario -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --crimson:   #8B1A1A;
+      --crimson-d: #6A1212;
+      --charcoal:  #2D2D2D;
+      --stone:     #5C5C5C;
+      --rule:      #D8D0C8;
+      --bg:        #F5F0EE;
+      --surface:   #FFFFFF;
+      --border:    #E2DAD5;
+      --radius:    4px;
+      /* Century Gothic → Futura (Mac) → Trebuchet MS → Nunito (web fallback) */
+      --font-gothic: 'Century Gothic', 'CenturyGothic', 'Futura', 'Futura PT',
+                     'Trebuchet MS', 'Nunito', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: var(--font-gothic);
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: #F7F3F0;
+      position: relative;
+      overflow: hidden;
+      padding: 52px 32px 52px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Blueprint SVG planos de fondo */
+    .hero::before {
+      content:'';
+      position:absolute; inset:0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Cg fill='none' stroke='%238B1A1A' stroke-width='0.5' opacity='0.13'%3E%3Crect x='20' y='20' width='160' height='120'/%3E%3Crect x='30' y='30' width='60' height='50'/%3E%3Crect x='100' y='30' width='70' height='50'/%3E%3Crect x='30' y='90' width='140' height='40'/%3E%3Cline x1='20' y1='80' x2='180' y2='80'/%3E%3Cline x1='90' y1='20' x2='90' y2='140'/%3E%3Ccircle cx='55' cy='175' r='35'/%3E%3Ccircle cx='55' cy='175' r='20'/%3E%3Cline x1='55' y1='140' x2='55' y2='210'/%3E%3Cline x1='20' y1='175' x2='90' y2='175'/%3E%3Crect x='220' y='15' width='150' height='200'/%3E%3Crect x='235' y='30' width='50' height='70'/%3E%3Crect x='300' y='30' width='55' height='70'/%3E%3Crect x='235' y='115' width='120' height='85'/%3E%3Cline x1='220' y1='110' x2='370' y2='110'/%3E%3Cline x1='290' y1='15' x2='290' y2='215'/%3E%3Crect x='20' y='235' width='340' height='55'/%3E%3Cline x1='20' y1='255' x2='360' y2='255'/%3E%3Cline x1='120' y1='235' x2='120' y2='290'/%3E%3Cline x1='240' y1='235' x2='240' y2='290'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 500px 375px;
+      background-position: center;
+      pointer-events:none;
+    }
+
+    /* Fade edges */
+    .hero::after {
+      content:'';
+      position:absolute; inset:0;
+      background: radial-gradient(ellipse 70% 80% at 50% 50%, transparent 30%, #F7F3F0 90%);
+      pointer-events:none;
+    }
+
+    .hero-inner { position:relative; z-index:1; }
+
+    /* Logo 4G */
+    .hero-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .logo-mark {
+      display:flex; align-items:baseline; gap:0;
+      font-family: var(--font-gothic);
+      font-size: 48px;
+      font-weight: 700;
+      line-height:1;
+      letter-spacing: -.01em;
+    }
+    .logo-4 { color: var(--charcoal); }
+    .logo-g { color: var(--crimson); }
+
+    .logo-divider {
+      width:1px; height:52px;
+      background: var(--border);
+    }
+
+    .logo-text {
+      text-align:left;
+      line-height:1.15;
+    }
+    .logo-text-main {
+      display:block;
+      font-family: var(--font-gothic);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+    }
+    .logo-text-sub {
+      display:block;
+      font-family: var(--font-gothic);
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-top:2px;
+    }
+
+    .hero-eyebrow {
+      display:inline-block;
+      font-size:10px;
+      font-weight:600;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color: var(--crimson);
+      border: 1px solid rgba(139,26,26,.35);
+      background: rgba(139,26,26,.05);
+      padding: 4px 14px;
+      border-radius: 2px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-gothic);
+      font-size: clamp(24px, 4vw, 40px);
+      font-weight: 700;
+      color: var(--charcoal);
+      letter-spacing: .03em;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .hero h1 em {
+      font-style:normal;
+      color: var(--crimson);
+    }
+    .hero-desc {
+      max-width: 440px;
+      margin: 0 auto 32px;
+      font-size: 13px;
+      color: var(--stone);
+      line-height: 1.7;
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      max-width: 440px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .search-wrap svg {
+      position:absolute; left:14px; top:50%;
+      transform:translateY(-50%);
+      color: var(--stone); pointer-events:none;
+    }
+    #search {
+      width:100%;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--charcoal);
+      font-family: var(--font-gothic);
+      font-size:13px;
+      padding: 12px 16px 12px 44px;
+      outline:none;
+      transition: border-color .2s, box-shadow .2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+    #search::placeholder { color: #AAAAA0; }
+    #search:focus {
+      border-color: var(--crimson);
+      box-shadow: 0 0 0 3px rgba(139,26,26,.08);
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 32px;
+      display:flex; align-items:center; gap:24px;
+      font-size:11px; color: var(--stone);
+      letter-spacing:.04em; text-transform:uppercase;
+    }
+    .stat { display:flex; align-items:center; gap:6px; }
+    .stat strong { color: var(--charcoal); font-weight:600; }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ── SECTION ── */
+    .nivel-section { margin-bottom: 12px; }
+    .nivel-section.hidden { display:none; }
+
+    .nivel-header {
+      display:flex; align-items:center; gap:10px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      user-select: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .nivel-header:hover {
+      border-color: var(--crimson);
+      box-shadow: 0 2px 10px rgba(139,26,26,.08);
+    }
+    .nivel-section.open .nivel-header {
+      border-color: var(--crimson);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-color: var(--border);
+    }
+
+    .nivel-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+    .nivel-title {
+      font-size:10px; font-weight:600;
+      letter-spacing:.16em; text-transform:uppercase;
+    }
+    .nivel-rule { flex:1; }
+    .nivel-count {
+      font-size:10px; color: var(--stone);
+      letter-spacing:.06em;
+    }
+
+    /* Chevron */
+    .nivel-chevron {
+      width:16px; height:16px; flex-shrink:0;
+      color: var(--stone);
+      transition: transform .25s ease;
+    }
+    .nivel-section.open .nivel-chevron { transform: rotate(180deg); }
+
+    /* Contenedor colapsable */
+    .cards-wrap {
+      display: none;
+      border: 1px solid var(--crimson);
+      border-top: none;
+      border-bottom-left-radius: var(--radius);
+      border-bottom-right-radius: var(--radius);
+      padding: 16px;
+      background: var(--bg);
+    }
+    .nivel-section.open .cards-wrap { display:block; }
+
+    /* Hint búsqueda cuando colapsado */
+    .nivel-section:not(.open):not(.search-expanded) .cards-wrap { display:none; }
+    /* Cuando hay búsqueda activa, siempre mostrar */
+    .nivel-section.search-expanded .cards-wrap {
+      display:block;
+      border-color: var(--border);
+    }
+    .nivel-section.search-expanded .nivel-header {
+      border-color: var(--border);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    /* ── GRID ── */
+    .cards-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 10px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 16px 14px;
+      display:flex; flex-direction:column; gap:12px;
+      transition: box-shadow .2s, border-color .2s, transform .15s;
+    }
+    .card:hover {
+      border-color: var(--crimson);
+      box-shadow: 0 4px 20px rgba(139,26,26,.1);
+      transform: translateY(-1px);
+    }
+    .card.hidden { display:none; }
+
+    .card-header {
+      display:flex; align-items:flex-start;
+      justify-content:space-between; gap:8px;
+    }
+    .cargo-name {
+      font-size:12.5px; font-weight:500;
+      line-height:1.4; color: var(--charcoal);
+      letter-spacing:.01em;
+    }
+    .form-tag {
+      font-size:9.5px; font-weight:600;
+      letter-spacing:.08em; text-transform:uppercase;
+      border-radius:2px; padding:2px 7px;
+      flex-shrink:0; margin-top:2px;
+      white-space:nowrap;
+    }
+
+    .eval-btn {
+      display:inline-flex; align-items:center;
+      justify-content:center; gap:7px;
+      background: var(--crimson);
+      color:#fff;
+      font-family: var(--font-gothic);
+      font-size:11px; font-weight:600;
+      letter-spacing:.08em;
+      text-decoration:none;
+      border-radius: var(--radius);
+      padding: 8px 14px;
+      transition: background .18s;
+      width:100%;
+    }
+    .eval-btn:hover { background: var(--crimson-d); }
+
+    /* ── EMPTY ── */
+    #empty {
+      display:none; text-align:center;
+      padding:60px 20px; color: var(--stone);
+    }
+    #empty svg { margin-bottom:14px; opacity:.3; }
+    #empty p { font-size:14px; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align:center; padding:24px;
+      color: var(--stone); font-size:11px;
+      letter-spacing:.06em; text-transform:uppercase;
+      border-top:1px solid var(--border);
+      background: var(--surface);
+    }
+    footer strong { color: var(--crimson); }
+
+    @media (max-width:520px) {
+      .hero { padding:40px 16px 36px; }
+      .stats-bar { flex-wrap:wrap; gap:12px; padding:10px 16px; }
+      main { padding:28px 14px 60px; }
+      .cards-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+
+    <!-- Logo 4G Architecture -->
+    <div class="hero-logo">
+      <div class="logo-mark">
+        <span class="logo-4">4</span><span class="logo-g">G</span>
+      </div>
+      <div class="logo-divider"></div>
+      <div class="logo-text">
+        <span class="logo-text-main">Architecture</span>
+        <span class="logo-text-sub">Expand Your Limits</span>
+      </div>
+    </div>
+
+    <div class="hero-eyebrow">Evaluación de Desempeño · 4G Architecture</div>
+    <h1>Evaluación de <em>Desempeño 180°</em></h1>
+    <p class="hero-desc">Encuentra tu cargo en el directorio y accede directamente a tu evaluación. No se requiere cuenta adicional.</p>
+
+    <div class="search-wrap">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input id="search" type="text" placeholder="Busca tu cargo o código de formulario…" autocomplete="off"/>
+    </div>
+
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat"><strong>57</strong>&nbsp;cargos</div>
+  <div class="stat"><strong>9</strong>&nbsp;evaluaciones</div>
+  <div class="stat"><strong>4</strong>&nbsp;niveles</div>
+  <div class="stat">Acceso libre · Sin cuenta requerida</div>
+
+</div>
+
+<main>
+
+    <section class="nivel-section" data-nivel="Dirección">
+    <div class="nivel-header">
+      <div class="nivel-dot" style="background:#8B1A1A"></div>
+      <span class="nivel-title" style="color:#8B1A1A">DIRECCIÓN</span>
+      <div class="nivel-rule"></div>
+      <span class="nivel-count">5 cargos</span>
+      <svg class="nivel-chevron" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </div>
+    <div class="cards-wrap">
+    <div class="cards-grid">
+      <div class="card" data-cargo="ARCHITECTURE DIRECTOR" data-form="FA01">
+        <div class="card-header">
+          <span class="cargo-name">ARCHITECTURE DIRECTOR</span>
+          <span class="form-tag" style="background:#8B1A1A;color:#F5F0EE">FA01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/2wUHg9Ybug" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="CLADDING DIRECTOR" data-form="FA01">
+        <div class="card-header">
+          <span class="cargo-name">CLADDING DIRECTOR</span>
+          <span class="form-tag" style="background:#8B1A1A;color:#F5F0EE">FA01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/2wUHg9Ybug" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="CMS DIRECTOR" data-form="FA01">
+        <div class="card-header">
+          <span class="cargo-name">CMS DIRECTOR</span>
+          <span class="form-tag" style="background:#8B1A1A;color:#F5F0EE">FA01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/2wUHg9Ybug" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ENG DIRECTOR" data-form="FA01">
+        <div class="card-header">
+          <span class="cargo-name">ENG DIRECTOR</span>
+          <span class="form-tag" style="background:#8B1A1A;color:#F5F0EE">FA01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/2wUHg9Ybug" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="GLAZING DIRECTOR" data-form="FA01">
+        <div class="card-header">
+          <span class="cargo-name">GLAZING DIRECTOR</span>
+          <span class="form-tag" style="background:#8B1A1A;color:#F5F0EE">FA01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/2wUHg9Ybug" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+    </div>
+    </div>
+  </section>
+  <section class="nivel-section" data-nivel="Coordinación">
+    <div class="nivel-header">
+      <div class="nivel-dot" style="background:#3D3D3D"></div>
+      <span class="nivel-title" style="color:#3D3D3D">COORDINACIÓN</span>
+      <div class="nivel-rule"></div>
+      <span class="nivel-count">7 cargos</span>
+      <svg class="nivel-chevron" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </div>
+    <div class="cards-wrap">
+    <div class="cards-grid">
+      <div class="card" data-cargo="BIM COORDINATOR" data-form="FB02">
+        <div class="card-header">
+          <span class="cargo-name">BIM COORDINATOR</span>
+          <span class="form-tag" style="background:#3D3D3D;color:#F5F0EE">FB02</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/JNXD9i3mM0" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="BIM COORDINATOR SENIOR" data-form="FB02">
+        <div class="card-header">
+          <span class="cargo-name">BIM COORDINATOR SENIOR</span>
+          <span class="form-tag" style="background:#3D3D3D;color:#F5F0EE">FB02</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/JNXD9i3mM0" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="BIM MANAGER" data-form="FB01">
+        <div class="card-header">
+          <span class="cargo-name">BIM MANAGER</span>
+          <span class="form-tag" style="background:#3D3D3D;color:#F5F0EE">FB01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/sgyDgUJkcv" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="LIDER DE CALIDAD DE PROCESOS" data-form="FB01">
+        <div class="card-header">
+          <span class="cargo-name">LIDER DE CALIDAD DE PROCESOS</span>
+          <span class="form-tag" style="background:#3D3D3D;color:#F5F0EE">FB01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/sgyDgUJkcv" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="OPERATION DEVELOPMENT MANAGER JUNIOR" data-form="FB01">
+        <div class="card-header">
+          <span class="cargo-name">OPERATION DEVELOPMENT MANAGER JUNIOR</span>
+          <span class="form-tag" style="background:#3D3D3D;color:#F5F0EE">FB01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/sgyDgUJkcv" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="OPERATION DEVELOPMENT MANAGER SENIOR" data-form="FB01">
+        <div class="card-header">
+          <span class="cargo-name">OPERATION DEVELOPMENT MANAGER SENIOR</span>
+          <span class="form-tag" style="background:#3D3D3D;color:#F5F0EE">FB01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/sgyDgUJkcv" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="TECHNICAL DEVELOPMENT MANAGER" data-form="FB02">
+        <div class="card-header">
+          <span class="cargo-name">TECHNICAL DEVELOPMENT MANAGER</span>
+          <span class="form-tag" style="background:#3D3D3D;color:#F5F0EE">FB02</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/JNXD9i3mM0" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+    </div>
+    </div>
+  </section>
+  <section class="nivel-section" data-nivel="Supervisión">
+    <div class="nivel-header">
+      <div class="nivel-dot" style="background:#6B3A3A"></div>
+      <span class="nivel-title" style="color:#6B3A3A">SUPERVISIÓN</span>
+      <div class="nivel-rule"></div>
+      <span class="nivel-count">13 cargos</span>
+      <svg class="nivel-chevron" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </div>
+    <div class="cards-wrap">
+    <div class="cards-grid">
+      <div class="card" data-cargo="ASSISTANT PROJECT MANAGER" data-form="FC02">
+        <div class="card-header">
+          <span class="cargo-name">ASSISTANT PROJECT MANAGER</span>
+          <span class="form-tag" style="background:#6B3A3A;color:#F5F0EE">FC02</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/DJVAH4J37L" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ASSISTANT PROJECT MANAGER JUNIOR" data-form="FC02">
+        <div class="card-header">
+          <span class="cargo-name">ASSISTANT PROJECT MANAGER JUNIOR</span>
+          <span class="form-tag" style="background:#6B3A3A;color:#F5F0EE">FC02</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/DJVAH4J37L" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ASSISTANT PROJECT MANAGER SENIOR" data-form="FC02">
+        <div class="card-header">
+          <span class="cargo-name">ASSISTANT PROJECT MANAGER SENIOR</span>
+          <span class="form-tag" style="background:#6B3A3A;color:#F5F0EE">FC02</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/DJVAH4J37L" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="CONSULTANT" data-form="FC03">
+        <div class="card-header">
+          <span class="cargo-name">CONSULTANT</span>
+          <span class="form-tag" style="background:#6B3A3A;color:#F5F0EE">FC03</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/KpD0Rziwrw" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="CONSULTANT JUNIOR" data-form="FC03">
+        <div class="card-header">
+          <span class="cargo-name">CONSULTANT JUNIOR</span>
+          <span class="form-tag" style="background:#6B3A3A;color:#F5F0EE">FC03</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/KpD0Rziwrw" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="CONSULTANT SENIOR" data-form="FC03">
+        <div class="card-header">
+          <span class="cargo-name">CONSULTANT SENIOR</span>
+          <span class="form-tag" style="background:#6B3A3A;color:#F5F0EE">FC03</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/KpD0Rziwrw" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="JOB CAPTAIN" data-form="FC04">
+        <div class="card-header">
+          <span class="cargo-name">JOB CAPTAIN</span>
+          <span class="form-tag" style="background:#6B3A3A;color:#F5F0EE">FC04</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/SEW8BH5BnH" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="JOB CAPTAIN JUNIOR" data-form="FC04">
+        <div class="card-header">
+          <span class="cargo-name">JOB CAPTAIN JUNIOR</span>
+          <span class="form-tag" style="background:#6B3A3A;color:#F5F0EE">FC04</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/SEW8BH5BnH" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="JOB CAPTAIN SENIOR" data-form="FC04">
+        <div class="card-header">
+          <span class="cargo-name">JOB CAPTAIN SENIOR</span>
+          <span class="form-tag" style="background:#6B3A3A;color:#F5F0EE">FC04</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/SEW8BH5BnH" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="PROJECT MANAGER" data-form="FC01">
+        <div class="card-header">
+          <span class="cargo-name">PROJECT MANAGER</span>
+          <span class="form-tag" style="background:#6B3A3A;color:#F5F0EE">FC01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/4ketL4MNWu" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="PROJECT MANAGER JUNIOR" data-form="FC01">
+        <div class="card-header">
+          <span class="cargo-name">PROJECT MANAGER JUNIOR</span>
+          <span class="form-tag" style="background:#6B3A3A;color:#F5F0EE">FC01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/4ketL4MNWu" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="PROJECT MANAGER JUNIOR-BIM" data-form="FC01">
+        <div class="card-header">
+          <span class="cargo-name">PROJECT MANAGER JUNIOR-BIM</span>
+          <span class="form-tag" style="background:#6B3A3A;color:#F5F0EE">FC01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/4ketL4MNWu" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="PROJECT MANAGER SENIOR" data-form="FC01">
+        <div class="card-header">
+          <span class="cargo-name">PROJECT MANAGER SENIOR</span>
+          <span class="form-tag" style="background:#6B3A3A;color:#F5F0EE">FC01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/4ketL4MNWu" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+    </div>
+    </div>
+  </section>
+  <section class="nivel-section" data-nivel="Operación">
+    <div class="nivel-header">
+      <div class="nivel-dot" style="background:#A0522D"></div>
+      <span class="nivel-title" style="color:#A0522D">OPERACIÓN</span>
+      <div class="nivel-rule"></div>
+      <span class="nivel-count">32 cargos</span>
+      <svg class="nivel-chevron" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </div>
+    <div class="cards-wrap">
+    <div class="cards-grid">
+      <div class="card" data-cargo="APRENDIZ UNIVERSITARIO" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">APRENDIZ UNIVERSITARIO</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ARCHITECT INTERMEDIATE" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">ARCHITECT INTERMEDIATE</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ARCHITECT JUNIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">ARCHITECT JUNIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ARCHITECT SENIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">ARCHITECT SENIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ARCHITECTURAL TECHNICIAN JUNIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">ARCHITECTURAL TECHNICIAN JUNIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ARCHITECTURAL TECHNICIAN SENIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">ARCHITECTURAL TECHNICIAN SENIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="DESIGN ENGINEER SENIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">DESIGN ENGINEER SENIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ENGINEER INTERMEDIATE" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">ENGINEER INTERMEDIATE</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ENGINEER JUNIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">ENGINEER JUNIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ENGINEER SENIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">ENGINEER SENIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ENGINEERING TECHNICIAN JUNIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">ENGINEERING TECHNICIAN JUNIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ENGINEERING TECHNICIAN SENIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">ENGINEERING TECHNICIAN SENIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ESTIMATOR JUNIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">ESTIMATOR JUNIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="ESTIMATOR SENIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">ESTIMATOR SENIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="INTERMEDIATE ENGINEER" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">INTERMEDIATE ENGINEER</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="MODELADOR BIM JUNIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">MODELADOR BIM JUNIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="MODELADOR BIM SENIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">MODELADOR BIM SENIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="MODELER JUNIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">MODELER JUNIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="MODELER SENIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">MODELER SENIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="PROFESIONAL BIM" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">PROFESIONAL BIM</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="SENA INTERN" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">SENA INTERN</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="SENIOR DESIGN ENGINEER" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">SENIOR DESIGN ENGINEER</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="TECHNICAL BIM JUNIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">TECHNICAL BIM JUNIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="TECHNICAL JUNIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">TECHNICAL JUNIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="TECHNICIAN" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">TECHNICIAN</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="TECHNICIAN BIM" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">TECHNICIAN BIM</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="TECHNICIAN INTERMEDIATE" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">TECHNICIAN INTERMEDIATE</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="TECHNICIAN JUNIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">TECHNICIAN JUNIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="TECHNICIAN SENIOR" data-form="FD01">
+        <div class="card-header">
+          <span class="cargo-name">TECHNICIAN SENIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FD01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/e71qc7XrP8" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="COMPUTATIONAL DESIGNER" data-form="FE01">
+        <div class="card-header">
+          <span class="cargo-name">COMPUTATIONAL DESIGNER</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FE01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/FEDKnHp0FX" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="COMPUTATIONAL DESIGNER JUNIOR" data-form="FE01">
+        <div class="card-header">
+          <span class="cargo-name">COMPUTATIONAL DESIGNER JUNIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FE01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/FEDKnHp0FX" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+      <div class="card" data-cargo="COMPUTATIONAL DESIGNER SENIOR" data-form="FE01">
+        <div class="card-header">
+          <span class="cargo-name">COMPUTATIONAL DESIGNER SENIOR</span>
+          <span class="form-tag" style="background:#A0522D;color:#F5F0EE">FE01</span>
+        </div>
+        <a class="eval-btn" href="https://forms.cloud.microsoft/r/FEDKnHp0FX" target="_blank" rel="noopener">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+          </svg>
+          Iniciar evaluación
+        </a>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <div id="empty">
+    <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <p>No se encontró ningún cargo con ese nombre.<br>Intenta con otra palabra clave.</p>
+  </div>
+
+</main>
+
+<footer>
+  <strong>4G Architecture</strong> &nbsp;·&nbsp; Evaluación de Desempeño 180° &nbsp;·&nbsp; Acceso libre, sin cuenta requerida
+</footer>
+
+<script>
+  const input   = document.getElementById('search');
+  const empty   = document.getElementById('empty');
+  const sections = document.querySelectorAll('.nivel-section');
+
+  // ── Acordeón: clic en header ──────────────────────────────────────────
+  sections.forEach(sec => {
+    const header = sec.querySelector('.nivel-header');
+    header.addEventListener('click', () => {
+      // Solo funciona cuando NO hay búsqueda activa
+      if (input.value.trim()) return;
+      sec.classList.toggle('open');
+    });
+  });
+
+  // ── Buscador ──────────────────────────────────────────────────────────
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let total = 0;
+
+    document.querySelectorAll('.card').forEach(card => {
+      const match = !q
+        || card.dataset.cargo.toLowerCase().includes(q)
+        || card.dataset.form.toLowerCase().includes(q);
+      card.classList.toggle('hidden', !match);
+      if (match) total++;
+    });
+
+    sections.forEach(sec => {
+      const visibles = sec.querySelectorAll('.card:not(.hidden)').length;
+
+      if (!q) {
+        // Sin búsqueda: volver a estado colapsado
+        sec.classList.remove('search-expanded', 'hidden');
+      } else if (visibles === 0) {
+        // Sin resultados en esta sección: ocultar
+        sec.classList.remove('search-expanded');
+        sec.classList.add('hidden');
+      } else {
+        // Hay resultados: expandir automáticamente
+        sec.classList.remove('hidden');
+        sec.classList.add('search-expanded');
+      }
+    });
+
+    empty.style.display = total === 0 && q ? 'block' : 'none';
+  });
+</script>
+
+</body>
+</html>
